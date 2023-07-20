@@ -18,8 +18,13 @@ router.post("/", (req, res) => {
       res.redirect("/places");
     })
     .catch((err) => {
-      console.log("err", err);
+if (err && err.name== 'ValidationError'){
+    let message= ' Validation Error: Oops! Looks like we have an error! '
+    //TODO: Generate error message(s)
+}
+else{
       res.render("error404");
+}
     });
 });
 
