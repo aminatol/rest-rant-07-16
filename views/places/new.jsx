@@ -77,6 +77,7 @@ function new_form(data) {
     <Def title={"Add a Place : RESTRant"}>
       <main>
         <h1>Add a New Place</h1>
+        {message}
         <form method="POST" action="/places">
           <div className="form-group">
             <label htmlFor="name">Place Name</label>
