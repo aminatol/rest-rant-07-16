@@ -12,19 +12,16 @@ router.get("/", (req, res) => {
     });
 });
 
+
+
 router.post("/", (req, res) => {
   db.Place.create(req.body)
     .then(() => {
       res.redirect("/places");
     })
     .catch((err) => {
-if (err && err.name== 'ValidationError'){
-    let message= ' Validation Error: Oops! Looks like we have an error! '
-    //TODO: Generate error message(s)
-}
-else{
+      console.log("err", err);
       res.render("error404");
-}
     });
 });
 
@@ -34,7 +31,9 @@ router.get("/new", (req, res) => {
 
 router.get("/:id", (req, res) => {
   db.Place.findById(req.params.id)
+  .populate('comments')
     .then((place) => {
+      console.log(place.comments)
       res.render("places/show", { place });
     })
     .catch((err) => {

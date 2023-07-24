@@ -1,5 +1,5 @@
-require("dotenv").config();
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 // MONGOOSE CONNECT
 mongoose
@@ -11,3 +11,4 @@ mongoose
   .catch((err) => console.log(err));
 
 module.exports.Place = require("./places");
+module.exports.Comment = require("./comment");
