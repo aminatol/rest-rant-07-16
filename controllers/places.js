@@ -55,7 +55,28 @@ router.get("/:id/edit", (req, res) => {
 });
 
 router.post("/:id/rant", (req, res) => {
-  res.send("GET /places/:id/rant stub");
+  console.log(req.body)
+  req.body.rant= req.body.rant ? true : false
+  db.Place.findById(req.params.id)
+  .then(place=>{
+    //Todo: Creat Comment
+    db.Comment.create(req.body)
+    .then(comment=>{
+      //Todo: Save comment id to place
+      place.comments.push(comment.id)
+      place.save()
+      .then(()=>{
+        res.redirect(`/places/${req.params.id}`)
+      })
+    })
+    .catch(err=>{
+      res.render("error404")
+    })
+  })
+  .catch(err=>{
+    res.render('error404')
+  })
+
 });
 
 router.delete("/:id/rant/:rantId", (req, res) => {
